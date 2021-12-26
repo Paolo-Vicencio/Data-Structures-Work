@@ -1,0 +1,65 @@
+C00A 000			jmp				jump to the beginning of the loop/program
+0000 001	n		dw		0		this is the size of the array
+0000 002	i 		dw 		0		this is the subscript variable
+0000 003 	fc 		dw		0		this is the forward index counter
+0000 004	zero	dw 		0		value of zero
+0001 005	one 	dw		1		value of 1
+3000 006	loadit 	dw 		0		this is the backwards index counter
+4000 007	storeit	dw		3000	create a store value to store the array pieces later
+0040 008	memory	dw		20		memory spot where the array will begin // CHECK
+0000 009	input	dw		0		memory spot for the input value
+
+1000 00A	start	read	n		reading in the size of the array
+4001 00B 			store 	n		storing this read in size into memory spot 001
+3004 00C			load	zero	loading zero
+4002 00D			store 	i 		storing zero into the index variable
+3001 00E	loop	load 	n		load n into the accumulator
+6002 00F 			sub 	i 		subtract the index from the n-value
+E01E 010			jmpl	exit	if the value is less than 0, exit the loop
+D01E 011			jmpe	exit 	if the value is equal to 0, exit the loop
+1000 012 			read 	input	reads in the input
+4009 013			store 	input	stores the input
+3007 014			load 	storeit	loads in the 4000 value to get ready to store it 
+5008 015			add 	memory 	adds the memory spot to the value
+5002 016			add 	i 		adds the i index value to 3000 + n
+4019 017			store 			stores the sum of n, i, and 3000
+3009 018			load 	input	loads the initial input
+0000 019	doit	dw		0		creates new value to plant instruction into and then stores the loaded input
+3002 01A			load 	i 		loads the counter
+5005 01B 			add 	1	  	adds 1 to the counter
+4002 01C			store 	i 		stores the counter back into its spot
+C00E 01D	bloop	jump	loop 	jumps back to the beginning of the loop!
+
+3004 01E 			load 	0 		loads in zero
+4003 01F 			store 	fc	 	stores zero into fc
+3001 020			load 	n 		loads in n
+6003 021 			sub 	fc 		subtracts fc from n
+E02F 022			jmpl 			jumps to end
+D02F 023			jmpe 			jumps to end
+3006 024 			load 	loadit	loads in 3000 instruction for load
+5008 025 			add 	memory	adds the array storage number to the accumulator
+5003 026 			add 	fc 		adds the fc variable
+4028 027			load 			stores the new number into the 025 spot
+0000 028 	doit	dw 				creates new instruction area
+D02F 029			jmp 			jmps before print
+1800 02A 			print 			prints this array item from the list
+3003 02B 			load 	fc 		loads in the fc 
+5005 02C 			add 	1 		adds one to it (increments fc)
+4003 02D 			store 			stores the fc variable again
+C024 02E	bloop	jmp 			jumps back to the beginning of the loop
+
+3002 02F 			load 	i 		loads in i counter
+6005 030 			sub 	1 		subtract 1
+4002 031 			store 	i 		restores i 
+3001 032 			load 	n 		loads in n
+5002 033 			add 	i 		adds i which should be equal to n at this point
+D03D 034 			jmpe 			if this number equals 0, then leave the loop
+3006 035 			load 	loadit 	loads in the 3000 command
+5008 036 			add 	memory	adds in the array begininng memory
+5002 037 			add 	i 		adds i
+4039 038 			store 			stores this value into the next spot
+0000 039 	doit	dw 				creates new instruction area
+D03D 03A
+1800 03B 			print 			prints the now loaded in value
+C02F 03C 	bloop	jmp 			jumps back to the beginning of the loop
+0000 03D 			halt 			ends the program

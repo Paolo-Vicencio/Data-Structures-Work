@@ -1,0 +1,22 @@
+C007 000  			jmp 			jump to the beginning of the loop/program
+0016 001 	n		dw 		20 		memory -> the size of the program  
+0000 002 	i 		dw 		0 		array iteration value (i)
+3000 003 	loadit 	dw 		3000 	load it instruction 3000
+0000 004 	zero 	dw 		0 		value of zero
+0001 005 	one 	dw 		1 		value of one 
+3004 006 			load  	zero 	loads in zero 
+4002 007 			store 	i 		stores 0 into i
+3001 008 			load 	n 		loads in n
+6002 009 			sub 	i 		subtracts i from the size value (n)
+E015 00A			jmpe			jumps to the end
+D015 00B 			jmpl			jumps to the end
+3003 00C 			load 	loadit 	loads in the 3000 value
+5002 00D			add 	i 		adds i to the 3000 value
+400F 00E 			store 			stores this 3000 + i value into the next cell
+0000 00F 			dw 		0 		instruction load
+1800 010 			print 			prints the value loaded in
+3002 011 			load 	i 		loads in the value i
+5005 012 			add 	1 		adds 1 to the i value (i++)
+4002 013			store 	i 		stores the i value back in
+C008 014 			jmp 			jumps back to the beginning
+0000 015 			halt 			ends the program

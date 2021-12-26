@@ -1,0 +1,36 @@
+C00A 000			jmp 		no value 	jump to the initial loop
+000A 001 	n 		dw 			10 			array size value (10);
+0000 002 	i 		dw 			0 			array iteration value (i)
+0000 003 	zero 	dw 			0 			value of zero
+0001 004 	one 	dw 			1 			value of one
+4000 005 	storeit dw 			4000 		the 4000 store instruction
+001E 006  				 	 	memory		this is where the array starts
+0000 007	input				0 			where the input is stored
+0000 008			dw			h 			h counter for moving around the items
+0000 009			dw 			temp 		temp variable to hold
+
+
+0000 00A 			dw 			y 			y counter to move around the bubble portion
+3000 00B 	loadit 	dw 			3000 		3000 load instruction
+0000 00C
+0000 00D
+3003 00E 			load 		zero 		loads zero into the accumulator
+4002 00F 			store 		i 			stores 0 into the i counter variable
+3001 010 	loop	load 		n 			loads in the ten value
+6002 011 			sub 		i 			subtracts i from the n value
+E01C 012 			jmpl 		exit 		if the value is less than 0, exit the loop
+D01C 013 			jmpe 		exit  		if the value is equal to 0, exit the loop
+1000 014 			read 		input 		reads in the input value
+4007 015 			store 		input 		stores the input into its appropriate spot
+3005 016 			load 		storeit 	loads in the 4000 store it value
+5006 017			add 		memory 		adds in the memory value
+5002 018 			add 		i 			adds the i value
+4017 019 			store 		current		stores the value we just found into the doit
+3007 01A 			load 		input 		loads the input value
+0000 01B 	doit 	dw 			0 			place to plant the new instruction
+3002 01C 			load 		i 			loads i
+5004 01D 			add 		1 			increments i by one
+4002 01E 			store 		i 			stores i again
+C00C 01F 	bloop 	jump 		loop	 	jumps back to the beginning of the loop
+
+300B
